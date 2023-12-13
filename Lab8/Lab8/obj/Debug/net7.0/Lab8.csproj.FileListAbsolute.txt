@@ -1,0 +1,14 @@
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\bin\Debug\net7.0\Lab8.exe
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\bin\Debug\net7.0\Lab8.deps.json
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\bin\Debug\net7.0\Lab8.runtimeconfig.json
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\bin\Debug\net7.0\Lab8.dll
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\bin\Debug\net7.0\Lab8.pdb
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\obj\Debug\net7.0\Lab8.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\obj\Debug\net7.0\Lab8.AssemblyInfoInputs.cache
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\obj\Debug\net7.0\Lab8.AssemblyInfo.cs
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\obj\Debug\net7.0\Lab8.csproj.CoreCompileInputs.cache
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\obj\Debug\net7.0\Lab8.dll
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\obj\Debug\net7.0\refint\Lab8.dll
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\obj\Debug\net7.0\Lab8.pdb
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\obj\Debug\net7.0\Lab8.genruntimeconfig.cache
+C:\Users\zpili\Desktop\Параллельные вычисления\Lab8\Lab8\obj\Debug\net7.0\ref\Lab8.dll

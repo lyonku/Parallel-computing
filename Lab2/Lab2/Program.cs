@@ -1,10 +1,7 @@
-﻿using System;
-
-class Program
+﻿class Program
 {
     static void Main()
     {
-        // Пример использования функции
         int a = 5;
         int b = 7;
 
@@ -15,10 +12,7 @@ class Program
 
     static int SquareOfNumbers(int x, int y)
     {
-        // Вычисляем произведение
         int multiplication = x * y;
-
-        // Возводим результат в квадрат
         int square = multiplication * multiplication;
 
         return square;

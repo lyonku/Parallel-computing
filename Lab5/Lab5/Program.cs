@@ -5,94 +5,78 @@ using System.Threading.Tasks;
 class Program
 {
     // Определение делегата
-    delegate Task<int[]> GetEvenSubsetDelegate(int size);
+    delegate int[] GetEvenSubsetDelegate();
 
-    static async Task Main()
+    static void Main()
     {
-        // Создание экземпляра делегата с использованием лямбда-выражения
-        GetEvenSubsetDelegate getEvenSubset = async (size) =>
+        MyTask myTask = new MyTask();
+
+        GetEvenSubsetDelegate getEvenSubset = () =>
         {
             // Генерация массива случайных чисел
-            int[] randomNumbers = GenerateRandomNumbers(size);
-
-            // Мониторинг процесса выполнения
-            Console.WriteLine("Выполняется обработка...");
-
-            // Задержка для имитации длительного вычисления
-            await Task.Delay(2000);
+            myTask.GenerateRandomNumbers(10);
 
             // Получение подмножества четных чисел
-            int[] evenSubset = GetEvenNumbers(randomNumbers);
+            int[] evenSubset = myTask.GetEvenNumbers();
 
-            // Возврат результата
             return evenSubset;
         };
+        CancellationTokenSource cancellationToken = new CancellationTokenSource();
 
-        // Добавлен тайм-аут в 5 секунд
-        var timeoutTask = Task.Delay(5000);
-        var resultTask = getEvenSubset(10);
+        Task<int[]> task = Task.Run(() => getEvenSubset());
 
-        // Ожидание завершения задачи или тайм-аута
-        var completedTask = await Task.WhenAny(resultTask, timeoutTask);
 
-        // Вывод информации о ходе решения
-        if (completedTask == resultTask)
+        bool waitCheck = task.Wait(TimeSpan.FromSeconds(2));
+        if (waitCheck)
         {
-            Console.WriteLine("Задача выполнена успешно:");
-            // Получение результата
-            int[] result = await resultTask;
-
-            Console.WriteLine("Подмножество четных чисел:");
-            foreach (var num in result)
-            {
-                Console.Write(num + " ");
-            }
+            Console.WriteLine("\nПрограмма выполнилась вовремя");
         }
         else
         {
-            Console.WriteLine("Время ожидания истекло. Задача прервана.");
+            cancellationToken.Cancel();
+            throw new TimeoutException("\nПрограмма не успела завершится ");
         }
     }
+}
+
+class MyTask
+{
+    private int[] array;
 
     // Генерация массива случайных чисел
-    static int[] GenerateRandomNumbers(int size)
+    public void GenerateRandomNumbers(int size)
     {
         Random random = new Random();
         int[] resultArray = new int[size];
 
         for (int i = 0; i < size; i++)
         {
-            resultArray[i] = random.Next(1, 100);
+            resultArray[i] = random.Next(100);
         }
 
-        return resultArray;
+        array = resultArray;
     }
 
     // Получение подмножества четных чисел из массива
-    static int[] GetEvenNumbers(int[] numbers)
+    public int[] GetEvenNumbers()
     {
-        int count = 0;
-
-        foreach (var num in numbers)
+        List<int> evenNumbers = new List<int>();
+        Thread.Sleep(3000);
+        foreach (var num in array)
         {
             if (num % 2 == 0)
             {
-                count++;
+                evenNumbers.Add(num);
             }
         }
 
-        int[] evenNumbers = new int[count];
-        int index = 0;
-
-        foreach (var num in numbers)
+        Console.WriteLine("Подмножество четных чисел:");
+        foreach (var num in evenNumbers)
         {
-            if (num % 2 == 0)
-            {
-                evenNumbers[index] = num;
-                index++;
-            }
+            Console.Write(num + " ");
         }
 
-        return evenNumbers;
+        return evenNumbers.ToArray();
     }
+
 }

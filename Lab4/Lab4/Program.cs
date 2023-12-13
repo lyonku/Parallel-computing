@@ -5,80 +5,67 @@ using System.Threading.Tasks;
 class Program
 {
     // Определение делегата
-    delegate Task<int[]> GetEvenSubsetDelegate(int size);
+    delegate int[] GetEvenSubsetDelegate(int size);
 
-    static async Task Main()
+    static void Main()
     {
-        // Создание экземпляра делегата с использованием лямбда-выражения
-        GetEvenSubsetDelegate getEvenSubset = async (size) =>
+        MyTask myTask = new MyTask();
+
+        GetEvenSubsetDelegate getEvenSubset = (size) =>
         {
             // Генерация массива случайных чисел
-            int[] randomNumbers = GenerateRandomNumbers(size);
-
-            // Мониторинг процесса выполнения
-            Console.WriteLine("Выполняется обработка...");
-
-            // Задержка для имитации длительного вычисления
-            await Task.Delay(2000);
+            myTask.GenerateRandomNumbers(size);
 
             // Получение подмножества четных чисел
-            int[] evenSubset = GetEvenNumbers(randomNumbers);
+            int[] evenSubset = myTask.GetEvenNumbers();
 
-            // Возврат результата
             return evenSubset;
         };
 
-        // Передача параметров и получение результата
-        int[] result = await getEvenSubset(10);
+        Task<int[]> task = Task.Run(() => getEvenSubset(10));
 
-        // Вывод результата
-        Console.WriteLine("Подмножество четных чисел:");
-        foreach (var num in result)
-        {
-            Console.Write(num + " ");
-        }
+        Console.ReadKey();
     }
+}
+
+class MyTask
+{
+    private int[] array;
 
     // Генерация массива случайных чисел
-    static int[] GenerateRandomNumbers(int size)
+    public void GenerateRandomNumbers(int size)
     {
         Random random = new Random();
         int[] resultArray = new int[size];
 
         for (int i = 0; i < size; i++)
         {
-            resultArray[i] = random.Next(1, 100);
+            resultArray[i] = random.Next(100);
         }
 
-        return resultArray;
+        array = resultArray;
     }
 
     // Получение подмножества четных чисел из массива
-    static int[] GetEvenNumbers(int[] numbers)
+    public int[] GetEvenNumbers()
     {
-        int count = 0;
+        List<int> evenNumbers = new List<int>();
 
-        foreach (var num in numbers)
+        foreach (var num in array)
         {
             if (num % 2 == 0)
             {
-                count++;
+                evenNumbers.Add(num);
             }
         }
 
-        int[] evenNumbers = new int[count];
-        int index = 0;
-
-        foreach (var num in numbers)
+        Console.WriteLine("Подмножество четных чисел:");
+        foreach (var num in evenNumbers)
         {
-            if (num % 2 == 0)
-            {
-                evenNumbers[index] = num;
-                index++;
-            }
+            Console.Write(num + " ");
         }
 
-        return evenNumbers;
+        return evenNumbers.ToArray();
     }
 
 }
